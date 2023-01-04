@@ -1,0 +1,24 @@
+import sqlite3 #importacao da linguagem
+conexao = sqlite3.connect('conexao') #conexao com o dbeaver
+cursor = conexao.cursor()
+
+#cursor.execute('CREATE TABLE cliente (id INT NOT NULL PRIMARY KEY, endereco VARCHAR(100), nome VARCHAR(50));')
+
+#One to many -> um para vários
+#cursor.execute('CREATE TABLE categoria(id INT NOT NULL, nome VARCHAR(100), PRIMARY KEY(id));')
+
+#cursor.execute('CREATE TABLE produto(id INT NOT NULL, nome VARCHAR(100), categoria_id INT NOT NULL, PRIMARY KEY(id), FOREIGN KEY(categoria_id) REFERENCES categoria(id));')
+
+#Many to many -> muitos para muitos
+#cursor.execute('CREATE TABLE categorias(id INT NOT NULL, nome VARCHAR(100), PRIMARY KEY(id));')
+#cursor.execute('CREATE TABLE produtos(id INT NOT NULL, nome VARCHAR(100), PRIMARY KEY(id));')
+
+#Many to many -> muitos para muitos
+#cursor.execute('CREATE TABLE categorias(id INT NOT NULL, nome VARCHAR(100), PRIMARY KEY(id));')
+#cursor.execute('CREATE TABLE produtos(id INT NOT NULL, nome VARCHAR(100), PRIMARY KEY(id));')
+cursor.execute('CREATE TABLE categoria_produto(categoria_id INT NOT NULL, produto_id INT NOT NULL, FOREIGN KEY(categoria_id) REFERENCES categorias(id), FOREIGN KEY(produto_id) REFERENCES produtos(id), CONSTRAINT pk_cat_prod PRIMARY KEY(categoria_id, produto_id));')
+
+
+
+conexao.commit()
+conexao.close()
